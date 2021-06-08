@@ -2,6 +2,7 @@
 
 import ImportarTarjetas from './pantallas/importarTarjetas';
 import ScreenImportarTarjetas from './pantallas/screenImportarTarjetas';
+import AcercaDe from './pantallas/acercaDe';
 import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View, ImageBackground} from 'react-native';
 
@@ -15,12 +16,14 @@ import { FlatList, StyleSheet, Text, View, ImageBackground} from 'react-native';
 
   
     return ( 
-      <ScreenImportarTarjetas/>
+      <AcercaDe/>
       
     )
   }
  
  }
+
+
 
 
 
