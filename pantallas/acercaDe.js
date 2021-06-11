@@ -8,8 +8,11 @@ render() {
 
   return( 
     <View style={styles.silla}> 
+        <Text onPress={ () => this.props.navigation.navigate('Vista Tarjetas')}>
+               Ir a vista tarjetas
+        </Text>
         <Text>
-                 Manuel Firpo, Tomás López Saavedra y Agustín Cutre son los desarrolladores de esta
+                 Manuel Firpo, Tomás López Saavedra y Agustín Cutre son los desarrolladores de esta app.
         </Text>
   </View>
   )

@@ -53,6 +53,7 @@ export default class ImportarTarjetas extends React.Component{
     <Text style={styles.emaily}> {item.email} </Text>
     <Text style={styles.emaily}> {item.dob.date} ({item.dob.age} years)</Text>
     
+    
   </View>
   
  
@@ -66,7 +67,9 @@ export default class ImportarTarjetas extends React.Component{
   
     return ( 
       <View> 
-
+        <Text style={styles.guardarItems} onPress={ () => this.props.navigation.navigate('Acerca De')}>
+               Ir a Acerca De
+        </Text>
         <TouchableOpacity style={styles.guardarItems} onPress={ () => this.storeData({items})} > 
                <Text style={styles.guardarItems}>Guardar Items</Text>              
           </TouchableOpacity>
