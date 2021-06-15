@@ -2,8 +2,8 @@
 import 'react-native-gesture-handler';
 // import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
+import { createDrawerNavigator } from '@react-navigation/drawer';
+// import { createStackNavigator } from '@react-navigation/stack';
 
 
 import ImportarTarjetas from './pantallas/importarTarjetas';
@@ -13,9 +13,10 @@ import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View, ImageBackground} from 'react-native';
 
 
-const Stack = createStackNavigator () ; 
+// const Stack = createStackNavigator () ; 
+const Drawer = createDrawerNavigator () ; 
 
- class App extends Component{ 
+ class App extends Component { 
   
 
 
@@ -28,14 +29,20 @@ const Stack = createStackNavigator () ;
       // <AcercaDe/>
 
       <NavigationContainer>
-      <Stack.Navigator>
-          <Stack.Screen name="Importador" component={ImportarTarjetas} />
+      <Drawer.Navigator initialRoutName="Importar Tarjetas" >
+
+      <Drawer.Screen name="Importador" component={ImportarTarjetas} />
+      <Drawer.Screen name="Acerca De" component={AcercaDe} />
+      <Drawer.Screen name="Vista Tarjetas" component={ScreenImportarTarjetas} />
+
+          {/* <Stack.Screen name="Importador" component={ImportarTarjetas} />
           <Stack.Screen name="Acerca De" component={AcercaDe} />
-          <Stack.Screen name="Vista Tarjetas" component={ScreenImportarTarjetas} />
+          <Stack.Screen name="Vista Tarjetas" component={ScreenImportarTarjetas} /> */}
+
           {/* <Stack.Screen name="Buscador + Modificador" component={BuscarModificar} /> */}
           {/* <Stack.Screen name="Papelera" component={Papelera} /> */}
           
-      </Stack.Navigator>
+      </Drawer.Navigator>
       </NavigationContainer>
       
     )
@@ -43,11 +50,6 @@ const Stack = createStackNavigator () ;
  
  }
 
-
-
-
-
- 
 
  export default App; 
  
