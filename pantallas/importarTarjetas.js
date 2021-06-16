@@ -30,14 +30,14 @@ export default class ImportarTarjetas extends React.Component{
       const jsonUsers = JSON.stringify(this.state.seleccionado.map((seleccionado) => this.state.items[seleccionado]));
       
       console.log(jsonUsers)
-
+      const seleccionadosLength = "se importaron las " +  this.state.seleccionado.length  + " tarjetas seleccionadas"
       await AsyncStorage.setItem('Usuarios', jsonUsers);
 
 
       this.setState({items: this.state.items.filter((tarjeta, idx) => !this.state.seleccionado.includes(idx))})
       this.setState({seleccionado: []})
       console.log("Almacenados con exito");
-      alert("Almacenado con exito");
+      alert(seleccionadosLength);
     }catch(e){
       console.log(e);
     }
@@ -76,9 +76,10 @@ export default class ImportarTarjetas extends React.Component{
         <TouchableOpacity style={styles.guardarItems} onPress={ () => this.storeData({items})} > 
                <Text style={styles.guardarItems}>Guardar Items</Text>              
           </TouchableOpacity>
-          <TouchableOpacity style={styles.guardarItems} onPress={ () => this.setState({})} > 
+          <TouchableOpacity style={styles.guardarItems} onPress={ () => getData()} > 
                <Text style={styles.guardarItems}>Refrescar Items</Text>              
           </TouchableOpacity>
+         
           
             <FlatList  data={this.state.items}
                       renderItem={ ({item, index}) =>
