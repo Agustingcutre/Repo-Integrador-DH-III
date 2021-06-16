@@ -11,7 +11,7 @@ export default class ImportarTarjetas extends React.Component{
     
     this.state = {
       items: [],
-      
+      seleccionado: []
     }
   }
 
@@ -27,8 +27,15 @@ export default class ImportarTarjetas extends React.Component{
 
   async storeData(Usuarios, results){
     try{
-      const jsonUsers = JSON.stringify(this.state.items);
+      const jsonUsers = JSON.stringify(this.state.seleccionado.map((seleccionado) => this.state.items[seleccionado]));
+      
+      console.log(jsonUsers)
+
       await AsyncStorage.setItem('Usuarios', jsonUsers);
+
+
+      this.setState({items: this.state.items.filter((tarjeta, idx) => !this.state.seleccionado.includes(idx))})
+      this.setState({seleccionado: []})
       console.log("Almacenados con exito");
       alert("Almacenado con exito");
     }catch(e){
@@ -41,20 +48,18 @@ export default class ImportarTarjetas extends React.Component{
 
 
 
+  seleccionar = (tarjeta) => {
 
+    if (!this.state.seleccionado.includes(tarjeta)) {
+      
+    this.setState({seleccionado: [...this.state.seleccionado, tarjeta] })
+    }
+
+  }
 
 // EL KEY
   keyExtractor = (item,idx) => idx.toString();
   // LO QUE SE MUESTRA
-  renderItem = ({item}) =>
-  <View style={styles.container}> 
-  <Image  style={styles.imagen} source={{uri:item.picture.thumbnail}} ></Image>
-    <Text style={styles.claseUsuarios}> {item.name.first} {item.name.last} </Text>
-    <Text style={styles.emaily}> {item.email} </Text>
-    <Text style={styles.emaily}> {item.dob.date} ({item.dob.age} years)</Text>
-    
-    
-  </View>
   
  
 
@@ -62,8 +67,6 @@ export default class ImportarTarjetas extends React.Component{
    
   var {items} = this.state
   
- 
-
   
     return ( 
       <View> 
@@ -78,7 +81,16 @@ export default class ImportarTarjetas extends React.Component{
           </TouchableOpacity>
           
             <FlatList  data={this.state.items}
-                      renderItem={ this.renderItem
+                      renderItem={ ({item, index}) =>
+                      <TouchableOpacity onPress={() => this.seleccionar(index)} style={styles.container}>
+                        <Text style={{color: "white", fontSize: 18}}>{this.state.seleccionado.includes(index) ? "seleccionada" : ""}</Text>
+                      <Image  style={styles.imagen} source={{uri:item.picture.thumbnail}} ></Image>
+                        <Text style={styles.claseUsuarios}> {item.name.first} {item.name.last} </Text>
+                        <Text style={styles.emaily}> {item.email} </Text>
+                        <Text style={styles.emaily}> {item.dob.date} ({item.dob.age} years)</Text>
+                        
+                        
+                      </TouchableOpacity>
                     }  
                     numColumns={3}
                     keyExtractor= {this.keyExtractor}
