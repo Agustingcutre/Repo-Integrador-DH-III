@@ -50,14 +50,14 @@ export default class ScreenImportarTarjetas extends Component {
                   await AsyncStorage.setItem("Borrados", JSON.stringify(this.state.items))
                   this.setState({items:[]})
                 }} >
-                          <Text style={styles.guardarItems}>ELIMINAR ITEMS</Text>
+                          <Text style={styles.guardarItems} >ELIMINAR ITEMS</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.guardarItems} onPress={ () => this.setState({})} >
                           <Text style={styles.guardarItems}>RECUPERAR ITEMS</Text>
                 </TouchableOpacity>
 
 
-    <FlatList
+    <FlatList style={styles.jose}
       data={this.state.items}
       renderItem={({item}) => <TouchableOpacity
 
@@ -74,6 +74,10 @@ export default class ScreenImportarTarjetas extends Component {
 
         + "\nFecha de registro:\n " + item.registered.date
         + "\nTelefono:\n " + item.phone
+        + "\nEmail:\n " + item.email
+        
+        + "\nFecha:\n " + item.dob.date
+        + "\nEdad:\n " + item.dob.age
 
 
       )}}
@@ -96,11 +100,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     display: "flex",
-    marginTop: 50,
+    marginTop: 70,
     justifyContent: 'center',
     alignItems: "center",
-    margin: 5,
-    backgroundColor: "purple"
+    margin: 30,
+    backgroundColor: 'lightseagreen',
+    borderRadius: 15, 
+    paddingTop: 50, 
+    paddingBottom: 50, 
+
   },
 
 

@@ -70,9 +70,9 @@ export default class ImportarTarjetas extends React.Component{
   
     return ( 
       <View> 
-        <Text style={styles.guardarItems} onPress={ () => this.props.navigation.navigate('Acerca De')}>
+        {/* <Text style={styles.guardarItems} onPress={ () => this.props.navigation.navigate('Acerca De')}>
                Ir a Acerca De
-        </Text>
+        </Text> */}
         <TouchableOpacity style={styles.guardarItems} onPress={ () => this.storeData({items})} > 
                <Text style={styles.guardarItems}>Guardar Items</Text>              
           </TouchableOpacity>
@@ -85,7 +85,7 @@ export default class ImportarTarjetas extends React.Component{
                       renderItem={ ({item, index}) =>
                       <TouchableOpacity onPress={() => this.seleccionar(index)} style={styles.container}>
                         <Text style={{color: "white", fontSize: 18}}>{this.state.seleccionado.includes(index) ? "seleccionada" : ""}</Text>
-                      <Image  style={styles.imagen} source={{uri:item.picture.thumbnail}} ></Image>
+                      <Image  style={styles.imagen} source={{uri:item.picture.thumbnail}} ></Image> 
                         <Text style={styles.claseUsuarios}> {item.name.first} {item.name.last} </Text>
                         <Text style={styles.emaily}> {item.email} </Text>
                         <Text style={styles.emaily}> {item.dob.date} ({item.dob.age} years)</Text>
@@ -93,7 +93,7 @@ export default class ImportarTarjetas extends React.Component{
                         
                       </TouchableOpacity>
                     }  
-                    numColumns={3}
+                    numColumns={2}
                     keyExtractor= {this.keyExtractor}
                     
                   
@@ -123,7 +123,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: "center",
     margin: 5,
-    backgroundColor: "purple"
+    backgroundColor: 'lightseagreen',
+    borderRadius: 10,
+    
   },
   claseUsuarios: {
     borderRadius: 15,
@@ -148,14 +150,19 @@ const styles = StyleSheet.create({
 
   },
   guardarItems: {
-    backgroundColor: 'red',
-    margin: 5,
-    marginTop: 30,
+    backgroundColor: 'lightseagreen',
+    margin: 10,
+    marginTop: 70,
+    textAlign: 'center',
+    paddingBottom: 30,
+    borderRadius: 30,
+    
 
   },
   imagen: { 
     width: 100,
     height: 100,
+    paddingBottom: 5,
 
 
   },
@@ -164,6 +171,10 @@ const styles = StyleSheet.create({
     color: "white",
     justifyContent: 'center',
     alignItems: "center",
+    paddingBottom: 30,
+    marginBottom: 30,
+    paddingLeft: 5,
+    paddingRight: 5,
 
   }
   
