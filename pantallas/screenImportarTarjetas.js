@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { Component } from 'react';
-import { FlatList, StyleSheet, Text, View, ImageBackground, TouchableOpacity} from 'react-native';
+import { FlatList, StyleSheet, Text, View, ImageBackground, TouchableOpacity, TextComponent, TextInput, Image} from 'react-native';
 import {getData} from '../src/api/usuarios'
 import { storeData} from './importarTarjetas';
 
@@ -11,7 +11,7 @@ export default class ScreenImportarTarjetas extends Component {
 
         this.state = {
           items: [],
-
+          usuariosImportados: [],
         }
       }
       componentDidMount() {
@@ -33,8 +33,34 @@ export default class ScreenImportarTarjetas extends Component {
         }
       }
 
+     
 
+// BUSCADOR
+// async filtrarPorNombre(buscado) {
+//   if (buscado.length >0) {
+//     var escrito = buscado 
+//     let usuariosImportados = this.state.items
+  
+//     let filtrado = usuariosImportados.filter(respuesta => {
+//       let itemData = respuesta.name.first.toUpperCase()
+//       let textData = escrito.toUpperCase()
+//       if(itemData.includes(textData))
+//       return(
+//         respuesta
+//       )
+//     })
+//       console.log(buscado)
+//       this.setState({usuariosImportados:filtrado})
+  
+//   }
+//   else{
+//     await this.getData()
+//     console.log("No buscaste nada")
+//   }
+  
+//   }
 
+  // TERMINA BUSCADOR
 
 
 
@@ -43,6 +69,8 @@ export default class ScreenImportarTarjetas extends Component {
 
         return(
           <View style={styles.container}>
+            
+            <TextInput style={styles.nombre} onChangeText={(buscado) => this.filtrarPorNombre(buscado)} type="text" placeholder="buscar por nombre" ></TextInput>
 
 
                 <TouchableOpacity style={styles.guardarItems} onPress={ async () => {
@@ -79,7 +107,8 @@ export default class ScreenImportarTarjetas extends Component {
       )}}
 
       >
-          <Text>{item.name.first} {item.name.last}</Text>
+          <Text style={styles.claseUsuarios}>{item.name.first} {item.name.last}</Text>
+          <Image  style={styles.imagen} source={{uri:item.picture.thumbnail}} ></Image>
         </TouchableOpacity>}
     />
 
@@ -101,6 +130,37 @@ const styles = StyleSheet.create({
     alignItems: "center",
     margin: 5,
     backgroundColor: "purple"
+  },
+  nombre: {
+    margin:40,
+    justifyContent: 'center',
+    alignItems: "center",
+    backgroundColor: "white",
+    width:150,
+    height:50,
+  },
+  claseUsuarios: {
+    borderRadius: 15,
+    borderStyle: "solid",
+    borderWidth: 1,
+    padding: 5,
+    width:150,
+    height:100,
+    backgroundColor: 'black',
+    display: "flex",
+    width: "50%",
+    margin: 5,
+    color: "white",
+    justifyContent: 'center',
+    alignItems: "center",
+    
+    
+  },
+  imagen: { 
+    width: 100,
+    height: 100,
+
+
   },
 
 

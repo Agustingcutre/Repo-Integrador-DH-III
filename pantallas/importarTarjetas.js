@@ -11,14 +11,26 @@ export default class ImportarTarjetas extends React.Component{
     
     this.state = {
       items: [],
-      seleccionado: []
+      seleccionado: [],
+      
     }
   }
 
   componentDidMount(){
     getData()
     .then( results => {
-      console.log(results)
+      console.log(results.length)
+      this.setState({items:results});
+    }
+      )
+
+    
+  }
+
+  refrescar(){
+    getData()
+    .then( results => {
+      console.log(results.length)
       this.setState({items:results});
     }
       )
@@ -76,7 +88,7 @@ export default class ImportarTarjetas extends React.Component{
         <TouchableOpacity style={styles.guardarItems} onPress={ () => this.storeData({items})} > 
                <Text style={styles.guardarItems}>Guardar Items</Text>              
           </TouchableOpacity>
-          <TouchableOpacity style={styles.guardarItems} onPress={ () => getData()} > 
+          <TouchableOpacity style={styles.guardarItems} onPress={ () => this.refrescar()} > 
                <Text style={styles.guardarItems}>Refrescar Items</Text>              
           </TouchableOpacity>
          
@@ -84,7 +96,7 @@ export default class ImportarTarjetas extends React.Component{
             <FlatList  data={this.state.items}
                       renderItem={ ({item, index}) =>
                       <TouchableOpacity onPress={() => this.seleccionar(index)} style={styles.container}>
-                        <Text style={{color: "white", fontSize: 18}}>{this.state.seleccionado.includes(index) ? "seleccionada" : ""}</Text>
+                        <Text style={{color: "black", fontSize: 18}}>{this.state.seleccionado.includes(index) ? "seleccionada" : ""}</Text>
                       <Image  style={styles.imagen} source={{uri:item.picture.thumbnail}} ></Image>
                         <Text style={styles.claseUsuarios}> {item.name.first} {item.name.last} </Text>
                         <Text style={styles.emaily}> {item.email} </Text>

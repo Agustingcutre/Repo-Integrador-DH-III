@@ -9,6 +9,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import ImportarTarjetas from './pantallas/importarTarjetas';
 import ScreenImportarTarjetas from './pantallas/screenImportarTarjetas';
 import AcercaDe from './pantallas/acercaDe';
+import BuscarModificar from './pantallas/buscarModificar';
 import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View, ImageBackground} from 'react-native';
 
@@ -34,6 +35,7 @@ const Drawer = createDrawerNavigator () ;
       <Drawer.Screen name="Importador" component={ImportarTarjetas} />
       <Drawer.Screen name="Acerca De" component={AcercaDe} />
       <Drawer.Screen name="Vista Tarjetas" component={ScreenImportarTarjetas} />
+      {/* <Drawer.Screen name="Buscar Modificar" component={BuscarModificar} /> */}
 
           {/* <Stack.Screen name="Importador" component={ImportarTarjetas} />
           <Stack.Screen name="Acerca De" component={AcercaDe} />
