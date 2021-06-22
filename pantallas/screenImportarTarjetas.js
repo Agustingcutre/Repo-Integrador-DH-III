@@ -34,31 +34,34 @@ export default class ScreenImportarTarjetas extends Component {
       }
 
      
-
+      
 // BUSCADOR
-// async filtrarPorNombre(buscado) {
-//   if (buscado.length >0) {
-//     var escrito = buscado 
-//     let usuariosImportados = this.state.items
+async filtrarPorNombre(buscado) {
+  if (buscado.length >0) {
+    var escrito = buscado 
+    let usuariosImportados = this.state.items
+    
   
-//     let filtrado = usuariosImportados.filter(respuesta => {
-//       let itemData = respuesta.name.first.toUpperCase()
-//       let textData = escrito.toUpperCase()
-//       if(itemData.includes(textData))
-//       return(
-//         respuesta
-//       )
-//     })
-//       console.log(buscado)
-//       this.setState({usuariosImportados:filtrado})
+    let filtrado = usuariosImportados.filter(respuesta => {
+      let itemData = respuesta.name.first.toUpperCase()
+      let lastName = respuesta.name.last.toUpperCase()
+      let age = respuesta.dob.age.toString()
+      let textData = escrito.toUpperCase()
+      if(itemData.includes(textData)) 
+      return(
+        itemData.includes(textData) || lastName.includes(textData) || age.includes(textData)
+      )
+    })
+      console.log(buscado)
+      this.setState({usuariosImportados:filtrado})
   
-//   }
-//   else{
-//     await this.getData()
-//     console.log("No buscaste nada")
-//   }
+  }
+  else{
+    await this.getData()
+    console.log("No buscaste nada")
+  }
   
-//   }
+  }
 
   // TERMINA BUSCADOR
 
@@ -80,9 +83,7 @@ export default class ScreenImportarTarjetas extends Component {
                 }} >
                           <Text style={styles.guardarItems} >ELIMINAR ITEMS</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.guardarItems} onPress={ () => this.setState({})} >
-                          <Text style={styles.guardarItems}>RECUPERAR ITEMS</Text>
-                </TouchableOpacity>
+                
 
 
     <FlatList style={styles.jose}
