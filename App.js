@@ -34,7 +34,7 @@ const Drawer = createDrawerNavigator () ;
 
       <Drawer.Screen name="Importador" component={ImportarTarjetas} />
       <Drawer.Screen name="Acerca De" component={AcercaDe} />
-      <Drawer.Screen name="Vista Tarjetas" component={ScreenImportarTarjetas} />
+      <Drawer.Screen name="Tarjetas importadas" component={ScreenImportarTarjetas} />
       {/* <Drawer.Screen name="Buscar Modificar" component={BuscarModificar} /> */}
 
           {/* <Stack.Screen name="Importador" component={ImportarTarjetas} />

@@ -73,7 +73,7 @@ async filtrarPorNombre(buscado) {
         return(
           <View style={styles.container}>
             
-            <TextInput style={styles.nombre} onChangeText={(buscado) => this.filtrarPorNombre(buscado)} type="text" placeholder="buscar por nombre" ></TextInput>
+            <TextInput style={styles.nombre} onChangeText={(buscado) => this.filtrarPorNombre(buscado)} type="text" placeholder=" Buscar (3 filtros) " ></TextInput>
 
 
                 <TouchableOpacity style={styles.guardarItems} onPress={ async () => {
@@ -112,10 +112,14 @@ async filtrarPorNombre(buscado) {
       )}}
 
       >
+
+      
           <Text style={styles.claseUsuarios}>{item.name.first} {item.name.last}</Text>
           <Image  style={styles.imagen} source={{uri:item.picture.thumbnail}} ></Image>
         </TouchableOpacity>}
     />
+
+      
 
           </View>
 
@@ -157,7 +161,7 @@ const styles = StyleSheet.create({
     height:100,
     backgroundColor: 'black',
     display: "flex",
-    width: "50%",
+    width: "100%",
     margin: 5,
     color: "white",
     justifyContent: 'center',
@@ -166,7 +170,7 @@ const styles = StyleSheet.create({
     
   },
   imagen: { 
-    width: 100,
+    width: 125,
     height: 100,
 
 
