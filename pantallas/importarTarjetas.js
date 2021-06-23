@@ -158,8 +158,6 @@ const styles = StyleSheet.create({
   },
   verDetalle: {
     backgroundColor: 'grey',
-    
-
   },
   guardarItems: {
     backgroundColor: 'lightseagreen',

@@ -81,7 +81,7 @@ async filtrarPorNombre(buscado) {
                   await AsyncStorage.setItem("Borrados", JSON.stringify(this.state.items))
                   this.setState({items:[]})
                 }} >
-                          <Text style={{marginBottom: 40, borderWidth: 1, padding: 10,}} >Enviar a papelera</Text>
+                          <Text style={{marginBottom: 40, borderWidth: 1, padding: 10,}} >Enviar a papelera todos</Text>
                 </TouchableOpacity>
                 
 
@@ -116,6 +116,7 @@ async filtrarPorNombre(buscado) {
               <View style={styles.prueba}>
               <Text style={styles.claseUsuarios}>{item.name.first} {item.name.last}</Text>
               <Text style={{marginLeft: 10, marginBottom: 30, padding: 20, paddingLeft: 35, borderRadius: 15,  borderStyle: "solid", borderWidth: 1, color: "white"}}>Ver más </Text>
+              <Text style={{marginLeft: 10,  marginBottom: 30, padding: 20, paddingLeft: 35, borderRadius: 15,  borderStyle: "solid", borderWidth: 1, color: "white"}}>Eliminar tarjeta</Text>
               <Image  style={styles.imagen} source={{uri:item.picture.thumbnail}} ></Image>
               </View>
         
@@ -156,7 +157,6 @@ const styles = StyleSheet.create({
     height:50,
   },
   claseUsuarios: {
-   
     paddingTop: 35,
     paddingLeft: 30,
     
