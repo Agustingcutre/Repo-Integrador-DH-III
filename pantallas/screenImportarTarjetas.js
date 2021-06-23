@@ -81,7 +81,7 @@ async filtrarPorNombre(buscado) {
                   await AsyncStorage.setItem("Borrados", JSON.stringify(this.state.items))
                   this.setState({items:[]})
                 }} >
-                          <Text style={styles.guardarItems} >ELIMINAR ITEMS</Text>
+                          <Text style={{marginBottom: 40, borderWidth: 1, padding: 10,}} >Enviar a papelera</Text>
                 </TouchableOpacity>
                 
 
@@ -95,27 +95,30 @@ async filtrarPorNombre(buscado) {
         "Calle y numero:\n" +
 
       item.location.street.name+ item.location.street.number + "\n"
-        + "Ciudad:\n " + item.location.city
-        + "\nPais:\n " + item.location.country
+        + "\nCiudad:\n" + item.location.city
+        + "\n\nPais:\n " + item.location.country
 
 
-        + "\nCodigo postal:\n " + item.location.postcode
+        + "\n\nCodigo postal:\n " + item.location.postcode
 
-        + "\nFecha de registro:\n " + item.registered.date
-        + "\nTelefono:\n " + item.phone
-        + "\nEmail:\n " + item.email
+        + "\n\nFecha de registro:\n " + item.registered.date
+        + "\n\nTelefono:\n " + item.phone
+        + "\n\nEmail:\n " + item.email
         
-        + "\nFecha:\n " + item.dob.date
-        + "\nEdad:\n " + item.dob.age
+        + "\n\nFecha:\n " + item.dob.date
+        + "\n\nEdad:\n " + item.dob.age
 
 
       )}}
 
       >
 
-      
-          <Text style={styles.claseUsuarios}>{item.name.first} {item.name.last}</Text>
-          <Image  style={styles.imagen} source={{uri:item.picture.thumbnail}} ></Image>
+              <View style={styles.prueba}>
+              <Text style={styles.claseUsuarios}>{item.name.first} {item.name.last}</Text>
+              <Text style={{marginLeft: 10, marginBottom: 30, padding: 20, paddingLeft: 35, borderRadius: 15,  borderStyle: "solid", borderWidth: 1, color: "white"}}>Ver más </Text>
+              <Image  style={styles.imagen} source={{uri:item.picture.thumbnail}} ></Image>
+              </View>
+        
         </TouchableOpacity>}
     />
 
@@ -153,25 +156,42 @@ const styles = StyleSheet.create({
     height:50,
   },
   claseUsuarios: {
-    borderRadius: 15,
-    borderStyle: "solid",
-    borderWidth: 1,
-    padding: 5,
+   
+    paddingTop: 35,
+    paddingLeft: 30,
+    
     width:150,
     height:100,
-    backgroundColor: 'black',
+    backgroundColor: 'lightseagreen',
     display: "flex",
     width: "100%",
     margin: 5,
+  
     color: "white",
     justifyContent: 'center',
     alignItems: "center",
+    borderRadius: 15,
+    borderStyle: "solid",
+    borderWidth: 1,
+    marginBottom: 15,
     
     
   },
   imagen: { 
     width: 125,
     height: 100,
+    borderRadius: 100 / 2,
+    marginLeft: 10,
+    
+
+
+  },
+  prueba: { 
+    borderRadius: 15,
+    borderStyle: "solid",
+    borderWidth: 1,
+    marginBottom: 60,
+    padding: 60,
 
 
   },

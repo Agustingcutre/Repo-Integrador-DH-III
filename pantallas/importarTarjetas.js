@@ -42,7 +42,7 @@ export default class ImportarTarjetas extends React.Component{
       const jsonUsers = JSON.stringify(this.state.seleccionado.map((seleccionado) => this.state.items[seleccionado]));
       
       console.log(jsonUsers)
-      const seleccionadosLength = "se importaron las " +  this.state.seleccionado.length  + " tarjetas seleccionadas"
+      const seleccionadosLength = "Se importaron las " +  this.state.seleccionado.length  + " tarjetas seleccionadas"
       await AsyncStorage.setItem('Usuarios', jsonUsers);
 
 
@@ -96,7 +96,7 @@ export default class ImportarTarjetas extends React.Component{
             <FlatList  data={this.state.items}
                       renderItem={ ({item, index}) =>
                       <TouchableOpacity onPress={() => this.seleccionar(index)} style={styles.container}>
-                        <Text style={{color: "black", fontSize: 18}}>{this.state.seleccionado.includes(index) ? "seleccionada" : ""}</Text>
+                        <Text style={{color: "black", fontSize: 18, margin: 5}}>{this.state.seleccionado.includes(index) ? "¡seleccionada!" : ""}</Text>
                       <Image  style={styles.imagen} source={{uri:item.picture.thumbnail}} ></Image>
                         <Text style={styles.claseUsuarios}> {item.name.first} {item.name.last} </Text>
                         <Text style={styles.emaily}> {item.email} </Text>
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     padding: 5,
     width:150,
     height:100,
-    backgroundColor: 'black',
+    backgroundColor: 'lightseagreen',
     display: "flex",
     width: "50%",
     margin: 5,
@@ -175,11 +175,12 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     paddingBottom: 5,
+    borderRadius: 100 / 2,
 
 
   },
   emaily:{
-    backgroundColor: 'black',
+    backgroundColor: 'lightseagreen',
     color: "white",
     justifyContent: 'center',
     alignItems: "center",
@@ -187,6 +188,11 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     paddingLeft: 5,
     paddingRight: 5,
+    borderRadius: 15,
+    borderStyle: "solid",
+    borderWidth: 1,
+    padding: 15,
+    margin: 10,
 
   }
   
