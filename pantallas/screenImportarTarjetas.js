@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { Component } from 'react';
-import { FlatList, StyleSheet, Text, View, ImageBackground, TouchableOpacity, TextComponent, TextInput, Image} from 'react-native';
+import { FlatList, StyleSheet, Text, View, ImageBackground, TouchableOpacity, TextComponent, TextInput, Image, Alert} from 'react-native';
 import {getData} from '../src/api/usuarios'
 import { storeData} from './importarTarjetas';
 
@@ -11,7 +11,7 @@ export default class ScreenImportarTarjetas extends Component {
 
         this.state = {
           items: [],
-          usuariosImportados: [],
+          
         }
       }
       componentDidMount() {
@@ -36,32 +36,31 @@ export default class ScreenImportarTarjetas extends Component {
      
       
 // BUSCADOR
-async filtrarPorNombre(buscado) {
-  if (buscado.length >0) {
-    var escrito = buscado 
-    let usuariosImportados = this.state.items
-    
-  
-    let filtrado = usuariosImportados.filter(respuesta => {
-      let itemData = respuesta.name.first.toUpperCase()
-      let lastName = respuesta.name.last.toUpperCase()
-      let age = respuesta.dob.age.toString()
-      let textData = escrito.toUpperCase()
-      if(itemData.includes(textData)) 
-      return(
-        itemData.includes(textData) || lastName.includes(textData) || age.includes(textData)
-      )
-    })
-      console.log(buscado)
-      this.setState({usuariosImportados:filtrado})
-  
+buscar(buscado) {
+
+  if(buscado.length !==0) {
+    const data = this.state.items.filter(respuesta => {
+      const itemData = respuesta.name.first.toUpperCase(); 
+      const lastNameData = respuesta.name.last.toUpperCase();
+      const edadData = respuesta.dob.age.toString()
+      const buscadoData = buscado.toUpperCase();
+      return itemData.includes(buscadoData) || lastNameData.includes(buscadoData) || edadData.includes(buscadoData)
+
+    });
+      this.setState({
+        items : data,
+        buscado: buscado
+      })
+
   }
   else{
-    await this.getData()
-    console.log("No buscaste nada")
+    this.setState({
+      items:this.state.items
+    })
+   
   }
-  
-  }
+}
+   
 
   // TERMINA BUSCADOR
 
@@ -69,11 +68,12 @@ async filtrarPorNombre(buscado) {
 
     render(){
       var {items} = this.state
+      
 
         return(
           <View style={styles.container}>
             
-            <TextInput style={styles.nombre} onChangeText={(buscado) => this.filtrarPorNombre(buscado)} type="text" placeholder=" Buscar (3 filtros) " ></TextInput>
+            <TextInput  placeholder="Filtrar por nombre"  style={styles.nombre}  onChangeText={(buscado) => this.buscar(buscado) }  />  
 
 
                 <TouchableOpacity style={styles.guardarItems} onPress={ async () => {
