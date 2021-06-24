@@ -26,6 +26,9 @@ export default class ScreenImportarTarjetas extends Component {
       buscado: "",
     };
   }
+
+  // 1) TRAIGO LOS USUARIOS  
+
   componentDidMount() {
     this.traerUsuarios();
   }
@@ -34,6 +37,7 @@ export default class ScreenImportarTarjetas extends Component {
     try {
       const jsonUsers = await AsyncStorage.getItem("Usuarios");
       console.log(jsonUsers);
+      // 2) PARSEO A JSON
       const usuariosImportados = JSON.parse(jsonUsers);
       this.setState({ items: usuariosImportados });
     } catch (e) {
@@ -93,6 +97,9 @@ export default class ScreenImportarTarjetas extends Component {
 
   // TERMINA COMENTARIOS
 
+
+   
+
   render() {
     var { items } = this.state;
     var comentarios = this.state.comentarios;
@@ -105,6 +112,9 @@ export default class ScreenImportarTarjetas extends Component {
           onChangeText={(buscado) => this.buscar(buscado)}
         />
 
+      {/* // 3) EL BOTON PARA ELIMINAR EN EL ASYNC STORAGE GUARDA UN ARRAY VACIO EN USUARIOS
+      Y EN BORRADOS METE LOS ITEMS QUE ESTAN ACTUALMENTE  */}
+
         <TouchableOpacity
           style={styles.guardarItems}
           onPress={async () => {
@@ -113,6 +123,7 @@ export default class ScreenImportarTarjetas extends Component {
               "Borrados",
               JSON.stringify(this.state.items)
             );
+            // 4) STATE LOCAL SE ME VA A UN ARRAY VACIO
             this.setState({ items: [] });
           }}
         >
@@ -126,6 +137,9 @@ export default class ScreenImportarTarjetas extends Component {
         >
           <Text style={styles.guardarItems}>Refrescar importacion</Text>
         </TouchableOpacity>
+
+        {/* 5) FLATSLIST  DONDE PARA CADA ITEM RENDERIZA UN BOTON QUE DISPARA UN ALERT CON 
+        LOS DATOS CORRESPONDIENTES */}
 
         <FlatList
           style={styles.jose}

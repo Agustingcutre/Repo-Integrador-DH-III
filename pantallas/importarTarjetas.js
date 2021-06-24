@@ -26,7 +26,7 @@ export default class ImportarTarjetas extends React.Component {
   }
 
   componentDidMount() {
-    Alert.prompt("Hola", "Cuantas tarjetas queres traer capo", [
+    Alert.prompt("Hola", "Cuantas tarjetas queres traer?", [
       {
         text: "Buscar",
         onPress: (resultados) => {
