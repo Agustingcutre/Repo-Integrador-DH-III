@@ -61,7 +61,8 @@ buscar(buscado) {
   }
   else {
     this.setState({
-      filtrados:this.state.items,
+      filtrados:[],
+      // this.state.items,
       buscado: buscado
 
     })
@@ -172,7 +173,7 @@ async storageComentarios (value) {
                   await AsyncStorage.setItem("Usuarios", JSON.stringify(nuevosUsuarios))
                   await AsyncStorage.setItem("Borrados", JSON.stringify([...borrados, item]))
 
-                  this.setState({items: nuevosUsuarios})
+                  this.setState({items: nuevosUsuarios, filtrados: nuevosUsuarios})
 
                 }}>
               <Text style={{marginLeft: 10,  marginBottom: 30, padding: 20, paddingLeft: 35, borderRadius: 15,  borderStyle: "solid", borderWidth: 1, color: "white"}}>Eliminar tarjeta</Text>
