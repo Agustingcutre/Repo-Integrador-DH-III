@@ -11,13 +11,10 @@ export default class ScreenImportarTarjetas extends Component {
 
         this.state = {
           items: [],
-<<<<<<< Updated upstream
           comentarios:"",
         
          
           
-=======
->>>>>>> Stashed changes
           
         }
       }
@@ -49,16 +46,10 @@ buscar(buscado) {
     const data = this.state.items.filter(respuesta => {
       const itemData = respuesta.name.first.toUpperCase(); 
       const lastNameData = respuesta.name.last.toUpperCase();
-<<<<<<< Updated upstream
       const ciudadData = respuesta.location.city.toUpperCase() 
       const paisData = respuesta.location.state.toUpperCase() 
       const buscadoData = buscado.toUpperCase();
       return itemData.includes(buscadoData) || lastNameData.includes(buscadoData) || ciudadData.includes(buscadoData) || paisData.includes(buscadoData)
-=======
-      const edadData = respuesta.dob.age.toString()
-      const buscadoData = buscado.toUpperCase();
-      return itemData.includes(buscadoData) || lastNameData.includes(buscadoData) || edadData.includes(buscadoData)
->>>>>>> Stashed changes
 
     });
       this.setState({
@@ -66,7 +57,6 @@ buscar(buscado) {
         buscado: buscado
       })
 
-<<<<<<< Updated upstream
   }
   else {
     this.setState({
@@ -96,14 +86,6 @@ async storageComentarios (value) {
   catch(error){
     console.log(error);
 
-=======
-  }
-  else{
-    this.setState({
-      items:this.state.items
-    })
-   
->>>>>>> Stashed changes
   }
 }
    
@@ -121,23 +103,16 @@ async storageComentarios (value) {
 
 
 
-    render(){
+    render() {
       var {items} = this.state
-<<<<<<< Updated upstream
       var comentarios = this.state.comentarios
      
-=======
->>>>>>> Stashed changes
       
 
         return(
           <View style={styles.container}>
             
-<<<<<<< Updated upstream
             <TextInput  placeholder="Buscar"  style={styles.nombre}  onChangeText={(buscado) => this.buscar(buscado) }  />  
-=======
-            <TextInput  placeholder="Filtrar por nombre"  style={styles.nombre}  onChangeText={(buscado) => this.buscar(buscado) }  />  
->>>>>>> Stashed changes
 
 
                 <TouchableOpacity style={styles.guardarItems} onPress={ async () => {
@@ -149,7 +124,7 @@ async storageComentarios (value) {
                 </TouchableOpacity>
                 
 
-
+      
     <FlatList style={styles.jose}
       data={this.state.items}
       
@@ -196,7 +171,7 @@ async storageComentarios (value) {
 
 
                         <TouchableOpacity onPress= {()=> this.storageComentarios(item)}>
-                              <Text> Guardar comentario </Text>
+                              <Text> Guardar comentario. </Text>
                          </TouchableOpacity>
                          {/* TERMINAN COMENTARIOS */}
               </View>
@@ -210,10 +185,12 @@ async storageComentarios (value) {
 
 
 
-
+        
         )
-    }
-}
+    } 
+  
+    
+
 
 const styles = StyleSheet.create({
   container: {
