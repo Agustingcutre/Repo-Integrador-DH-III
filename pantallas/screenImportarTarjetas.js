@@ -87,8 +87,6 @@ async storageComentarios (value) {
     console.log(error);
 
   }
-}
-   
 
 
 }
@@ -103,7 +101,7 @@ async storageComentarios (value) {
 
 
 
-    render() {
+    render(){
       var {items} = this.state
       var comentarios = this.state.comentarios
      
@@ -124,7 +122,7 @@ async storageComentarios (value) {
                 </TouchableOpacity>
                 
 
-      
+
     <FlatList style={styles.jose}
       data={this.state.items}
       
@@ -161,13 +159,7 @@ async storageComentarios (value) {
               <Text> {comentarios}</Text>
               
               {/* COMENTARIOS */}
-              <TextInput  
-                       placeholder="Ingrese algun comentario.."
-                       style={styles.nombre}
-                       numberOfLines={10}
-                       multiline={true}
-                      onChangeText={text=> this.setState({comentarios : text})}
-                            /> 
+              <TextInput    placeholder="Comenta algo"   style={styles.nombre}    onChangeText={escrito=> this.setState({comentarios : escrito})}   /> 
 
 
                         <TouchableOpacity onPress= {()=> this.storageComentarios(item)}>
@@ -185,12 +177,10 @@ async storageComentarios (value) {
 
 
 
-        
-        )
-    } 
-  
-    
 
+        )
+    }
+}
 
 const styles = StyleSheet.create({
   container: {
