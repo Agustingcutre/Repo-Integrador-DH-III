@@ -12,6 +12,7 @@ import AcercaDe from './pantallas/acercaDe';
 import BuscarModificar from './pantallas/buscarModificar';
 import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View, ImageBackground} from 'react-native';
+import PapeleraDe from './pantallas/papeleraDe';
 
 
 // const Stack = createStackNavigator () ; 
@@ -35,6 +36,7 @@ const Drawer = createDrawerNavigator () ;
       <Drawer.Screen name="Importador" component={ImportarTarjetas} />
       <Drawer.Screen name="Acerca De" component={AcercaDe} />
       <Drawer.Screen name="Tarjetas importadas" component={ScreenImportarTarjetas} />
+      <Drawer.Screen name="Papelera de reciclaje" component={PapeleraDe} />
       {/* <Drawer.Screen name="Buscar Modificar" component={BuscarModificar} /> */}
 
           {/* <Stack.Screen name="Importador" component={ImportarTarjetas} />
