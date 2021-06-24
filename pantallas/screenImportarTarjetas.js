@@ -11,6 +11,10 @@ export default class ScreenImportarTarjetas extends Component {
 
         this.state = {
           items: [],
+          comentarios:"",
+        
+         
+          
           
         }
       }
@@ -42,9 +46,10 @@ buscar(buscado) {
     const data = this.state.items.filter(respuesta => {
       const itemData = respuesta.name.first.toUpperCase(); 
       const lastNameData = respuesta.name.last.toUpperCase();
-      const edadData = respuesta.dob.age.toString()
+      const ciudadData = respuesta.location.city.toUpperCase() 
+      const paisData = respuesta.location.state.toUpperCase() 
       const buscadoData = buscado.toUpperCase();
-      return itemData.includes(buscadoData) || lastNameData.includes(buscadoData) || edadData.includes(buscadoData)
+      return itemData.includes(buscadoData) || lastNameData.includes(buscadoData) || ciudadData.includes(buscadoData) || paisData.includes(buscadoData)
 
     });
       this.setState({
@@ -53,7 +58,7 @@ buscar(buscado) {
       })
 
   }
-  else{
+  else {
     this.setState({
       items:this.state.items
     })
@@ -65,15 +70,47 @@ buscar(buscado) {
   // TERMINA BUSCADOR
 
 
+  // COMENTARIOS
+
+async storageComentarios (value) {
+  try{
+      Object.assign(value, { comentarios: this.state.comentarios} );
+      const jsonValue = JSON.stringify(this.state.items)
+      await AsyncStorage.setItem("Usuarios", jsonValue)
+      console.log("se guardo en comentario")
+
+
+
+
+  }
+  catch(error){
+    console.log(error);
+
+  }
+
+
+}
+
+
+
+
+
+
+
+  // TERMINA COMENTARIOS
+
+
 
     render(){
       var {items} = this.state
+      var comentarios = this.state.comentarios
+     
       
 
         return(
           <View style={styles.container}>
             
-            <TextInput  placeholder="Filtrar por nombre"  style={styles.nombre}  onChangeText={(buscado) => this.buscar(buscado) }  />  
+            <TextInput  placeholder="Buscar"  style={styles.nombre}  onChangeText={(buscado) => this.buscar(buscado) }  />  
 
 
                 <TouchableOpacity style={styles.guardarItems} onPress={ async () => {
@@ -88,6 +125,7 @@ buscar(buscado) {
 
     <FlatList style={styles.jose}
       data={this.state.items}
+      
       renderItem={({item}) => <TouchableOpacity
 
 
@@ -118,6 +156,22 @@ buscar(buscado) {
               <Text style={{marginLeft: 10, marginBottom: 30, padding: 20, paddingLeft: 35, borderRadius: 15,  borderStyle: "solid", borderWidth: 1, color: "white"}}>Ver más </Text>
               <Text style={{marginLeft: 10,  marginBottom: 30, padding: 20, paddingLeft: 35, borderRadius: 15,  borderStyle: "solid", borderWidth: 1, color: "white"}}>Eliminar tarjeta</Text>
               <Image  style={styles.imagen} source={{uri:item.picture.thumbnail}} ></Image>
+              <Text> {comentarios}</Text>
+              
+              {/* COMENTARIOS */}
+              <TextInput  
+                       placeholder="Ingrese algun comentario.."
+                       style={styles.nombre}
+                       numberOfLines={10}
+                       multiline={true}
+                      onChangeText={text=> this.setState({comentarios : text})}
+                            /> 
+
+
+                        <TouchableOpacity onPress= {()=> this.storageComentarios(item)}>
+                              <Text> Guardar comentario </Text>
+                         </TouchableOpacity>
+                         {/* TERMINAN COMENTARIOS */}
               </View>
         
         </TouchableOpacity>}
