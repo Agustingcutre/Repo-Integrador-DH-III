@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View, ImageBackground, TouchableOpacity, TextComponent, TextInput, Image} from 'react-native';
 import {getData} from '../src/api/usuarios'
 import { storeData} from './importarTarjetas';
-// import Icon from 'react-native-vector-icons/dist/FontAwesome';
 
 export default class ScreenImportarTarjetas extends Component {
 
@@ -119,7 +118,6 @@ async filtrarPorNombre(buscado) {
               <Text style={{marginLeft: 10, marginBottom: 30, padding: 20, paddingLeft: 35, borderRadius: 15,  borderStyle: "solid", borderWidth: 1, color: "white"}}>Ver más </Text>
               <Text style={{marginLeft: 10,  marginBottom: 30, padding: 20, paddingLeft: 35, borderRadius: 15,  borderStyle: "solid", borderWidth: 1, color: "white"}}>Eliminar tarjeta</Text>
               <Image  style={styles.imagen} source={{uri:item.picture.thumbnail}} ></Image>
-              
               </View>
         
         </TouchableOpacity>}
