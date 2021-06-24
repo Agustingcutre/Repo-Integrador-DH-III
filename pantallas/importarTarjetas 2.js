@@ -1,7 +1,7 @@
 // import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { Component } from 'react';
-import { FlatList, StyleSheet, Text, View, ImageBackground, TouchableOpacity, Image, Alert} from 'react-native';
+import { FlatList, StyleSheet, Text, View, ImageBackground, TouchableOpacity, Image} from 'react-native';
 import { getData } from '../src/api/usuarios';
 
 
@@ -12,31 +12,23 @@ export default class ImportarTarjetas extends React.Component{
     this.state = {
       items: [],
       seleccionado: [],
-      tarjetas: 0
+      
     }
   }
 
   componentDidMount(){
-    Alert.prompt("Hola", "Cuantas tarjetas queres traer capo", [
-      {
-        text: "Buscar",
-        onPress: (resultados) => {
-          getData(resultados)
+    getData()
     .then( results => {
       console.log(results.length)
-      this.setState({items:results, tarjetas: resultados});
+      this.setState({items:results});
     }
       )
-        }
-      }
-    ])
-    
 
     
   }
 
   refrescar(){
-    getData(this.state.tarjetas)
+    getData()
     .then( results => {
       console.log(results.length)
       this.setState({items:results});
@@ -47,8 +39,7 @@ export default class ImportarTarjetas extends React.Component{
 
   async storeData(Usuarios, results){
     try{
-      const usuariosJsonViejos = JSON.parse(await AsyncStorage.getItem("Usuarios"))
-      const jsonUsers = JSON.stringify([...usuariosJsonViejos, ...this.state.seleccionado.map((seleccionado) => this.state.items[seleccionado])]);
+      const jsonUsers = JSON.stringify(this.state.seleccionado.map((seleccionado) => this.state.items[seleccionado]));
       
       console.log(jsonUsers)
       const seleccionadosLength = "Se importaron las " +  this.state.seleccionado.length  + " tarjetas seleccionadas"

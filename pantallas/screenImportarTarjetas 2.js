@@ -12,7 +12,7 @@ export default class ScreenImportarTarjetas extends Component {
         this.state = {
           items: [],
           comentarios:"",
-          filtrados: []
+        
          
           
           
@@ -21,7 +21,6 @@ export default class ScreenImportarTarjetas extends Component {
       componentDidMount() {
         this.traerUsuarios()
 
-      
       }
 
       async traerUsuarios() {
@@ -38,7 +37,7 @@ export default class ScreenImportarTarjetas extends Component {
         }
       }
 
-
+     
       
 // BUSCADOR
 buscar(buscado) {
@@ -54,16 +53,14 @@ buscar(buscado) {
 
     });
       this.setState({
-        filtrados: data,
+        items : data,
         buscado: buscado
       })
 
   }
   else {
     this.setState({
-      filtrados:this.state.items,
-      buscado: buscado
-
+      items:this.state.items
     })
    
   }
@@ -127,58 +124,37 @@ async storageComentarios (value) {
 
 
     <FlatList style={styles.jose}
-      data={this.state.filtrados.length === 0 ? this.state.items : this.state.filtrados}
+      data={this.state.items}
       
-      renderItem={({item, index}) => <View
+      renderItem={({item}) => <TouchableOpacity
 
+
+      onPress={() => {alert(
+        "Calle y numero:\n" +
+
+      item.location.street.name+ item.location.street.number + "\n"
+        + "\nCiudad:\n" + item.location.city
+        + "\n\nPais:\n " + item.location.country
+
+
+        + "\n\nCodigo postal:\n " + item.location.postcode
+
+        + "\n\nFecha de registro:\n " + item.registered.date
+        + "\n\nTelefono:\n " + item.phone
+        + "\n\nEmail:\n " + item.email
+        
+        + "\n\nFecha:\n " + item.dob.date
+        + "\n\nEdad:\n " + item.dob.age
+
+
+      )}}
 
       >
 
               <View style={styles.prueba}>
               <Text style={styles.claseUsuarios}>{item.name.first} {item.name.last}</Text>
-              <TouchableOpacity
-              
-              
-              onPress={() => {alert(
-                "Calle y numero:\n" +
-        
-              item.location.street.name+ item.location.street.number + "\n"
-                + "\nCiudad:\n" + item.location.city
-                + "\n\nPais:\n " + item.location.country
-        
-        
-                + "\n\nCodigo postal:\n " + item.location.postcode
-        
-                + "\n\nFecha de registro:\n " + item.registered.date
-                + "\n\nTelefono:\n " + item.phone
-                + "\n\nEmail:\n " + item.email
-                
-                + "\n\nFecha:\n " + item.dob.date
-                + "\n\nEdad:\n " + item.dob.age
-        
-        
-              )}}
-        
-              >
               <Text style={{marginLeft: 10, marginBottom: 30, padding: 20, paddingLeft: 35, borderRadius: 15,  borderStyle: "solid", borderWidth: 1, color: "white"}}>Ver más </Text>
-
-              </TouchableOpacity>
-
-                <TouchableOpacity onPress={async () => {
-
-                  const nuevosUsuarios = this.state.items.filter((usuario, idx) => idx !== index);
-                  const borrados = JSON.parse(await AsyncStorage.getItem("Borrados"))
-
-                  await AsyncStorage.setItem("Usuarios", JSON.stringify(nuevosUsuarios))
-                  await AsyncStorage.setItem("Borrados", JSON.stringify([...borrados, item]))
-
-                  this.setState({items: nuevosUsuarios})
-
-                }}>
               <Text style={{marginLeft: 10,  marginBottom: 30, padding: 20, paddingLeft: 35, borderRadius: 15,  borderStyle: "solid", borderWidth: 1, color: "white"}}>Eliminar tarjeta</Text>
-
-                </TouchableOpacity>
-
               <Image  style={styles.imagen} source={{uri:item.picture.thumbnail}} ></Image>
               <Text> {comentarios}</Text>
               
@@ -192,7 +168,7 @@ async storageComentarios (value) {
                          {/* TERMINAN COMENTARIOS */}
               </View>
         
-        </View>}
+        </TouchableOpacity>}
     />
 
       
