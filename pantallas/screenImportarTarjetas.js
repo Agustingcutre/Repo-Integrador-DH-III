@@ -23,6 +23,7 @@ export default class ScreenImportarTarjetas extends Component {
       items: [],
       comentarios: "",
       filtrados: [],
+      buscado: "",
     };
   }
   componentDidMount() {
@@ -68,7 +69,7 @@ export default class ScreenImportarTarjetas extends Component {
       });
     } else {
       this.setState({
-        filtrados: [],
+        filtrados: "",
         // this.state.items,
         buscado: buscado,
       });
@@ -130,6 +131,8 @@ export default class ScreenImportarTarjetas extends Component {
           style={styles.jose}
           data={
             this.state.filtrados.length === 0
+            //  this.state.buscado.length === 0
+            
               ? this.state.items
               : this.state.filtrados
           }
