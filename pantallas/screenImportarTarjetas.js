@@ -181,12 +181,12 @@ export default class ScreenImportarTarjetas extends Component {
                   </Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   onPress={async () => {
                     const nuevosUsuarios = this.state.items.filter(
                       (usuario, idx) => idx !== index
                     );
-                    // console.log(nuevosUsuarios)
+                   
                     const borrados = JSON.parse(
                       await AsyncStorage.getItem("Borrados")
                     );
@@ -220,7 +220,7 @@ export default class ScreenImportarTarjetas extends Component {
                   >
                     Eliminar tarjeta
                   </Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
                 <Image
                   style={styles.imagen}
