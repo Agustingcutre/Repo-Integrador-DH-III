@@ -53,7 +53,7 @@ export default class ScreenImportarTarjetas extends Component {
         const itemData = respuesta.name.first.toUpperCase();
         const lastNameData = respuesta.name.last.toUpperCase();
         const ciudadData = respuesta.location.city.toUpperCase();
-        const paisData = respuesta.location.state.toUpperCase();
+        const paisData = respuesta.location.country.toUpperCase();
         const buscadoData = buscado.toUpperCase();
         return (
           itemData.includes(buscadoData) ||
