@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { Component } from 'react';
-import { FlatList, StyleSheet, Text, View, ImageBackground, TouchableOpacity, TextComponent, TextInput, Image} from 'react-native';
+import { FlatList, StyleSheet, Text, View, ImageBackground, TouchableOpacity, TextComponent, TextInput, Image, Alert} from 'react-native';
 import {getData} from '../src/api/usuarios'
 import { storeData} from './importarTarjetas';
 
@@ -11,7 +11,11 @@ export default class ScreenImportarTarjetas extends Component {
 
         this.state = {
           items: [],
-          usuariosImportados: [],
+          comentarios:"",
+        
+         
+          
+          
         }
       }
       componentDidMount() {
@@ -36,44 +40,77 @@ export default class ScreenImportarTarjetas extends Component {
      
       
 // BUSCADOR
-async filtrarPorNombre(buscado) {
-  if (buscado.length >0) {
-    var escrito = buscado 
-    let usuariosImportados = this.state.items
-    
-  
-    let filtrado = usuariosImportados.filter(respuesta => {
-      let itemData = respuesta.name.first.toUpperCase()
-      let lastName = respuesta.name.last.toUpperCase()
-      let age = respuesta.dob.age.toString()
-      let textData = escrito.toUpperCase()
-      if(itemData.includes(textData)) 
-      return(
-        itemData.includes(textData) || lastName.includes(textData) || age.includes(textData)
-      )
+buscar(buscado) {
+
+  if(buscado.length !==0) {
+    const data = this.state.items.filter(respuesta => {
+      const itemData = respuesta.name.first.toUpperCase(); 
+      const lastNameData = respuesta.name.last.toUpperCase();
+      const ciudadData = respuesta.location.city.toUpperCase() 
+      const paisData = respuesta.location.state.toUpperCase() 
+      const buscadoData = buscado.toUpperCase();
+      return itemData.includes(buscadoData) || lastNameData.includes(buscadoData) || ciudadData.includes(buscadoData) || paisData.includes(buscadoData)
+
+    });
+      this.setState({
+        items : data,
+        buscado: buscado
+      })
+
+  }
+  else {
+    this.setState({
+      items:this.state.items
     })
-      console.log(buscado)
-      this.setState({usuariosImportados:filtrado})
-  
+   
   }
-  else{
-    await this.getData()
-    console.log("No buscaste nada")
-  }
-  
-  }
+}
+   
 
   // TERMINA BUSCADOR
+
+
+  // COMENTARIOS
+
+async storageComentarios (value) {
+  try{
+      Object.assign(value, { comentarios: this.state.comentarios} );
+      const jsonValue = JSON.stringify(this.state.items)
+      await AsyncStorage.setItem("Usuarios", jsonValue)
+      console.log("se guardo en comentario")
+
+
+
+
+  }
+  catch(error){
+    console.log(error);
+
+  }
+
+
+}
+
+
+
+
+
+
+
+  // TERMINA COMENTARIOS
 
 
 
     render(){
       var {items} = this.state
+      var comentarios = this.state.comentarios
+     
+      
 
         return(
           <View style={styles.container}>
             
-            <TextInput style={styles.nombre} onChangeText={(buscado) => this.filtrarPorNombre(buscado)} type="text" placeholder=" Buscar (3 filtros) " ></TextInput>
+            <TextInput  placeholder="Buscar"  style={styles.nombre}  onChangeText={(buscado) => this.buscar(buscado) }  />  
 
 
                 <TouchableOpacity style={styles.guardarItems} onPress={ async () => {
@@ -88,6 +125,7 @@ async filtrarPorNombre(buscado) {
 
     <FlatList style={styles.jose}
       data={this.state.items}
+      
       renderItem={({item}) => <TouchableOpacity
 
 
@@ -118,6 +156,22 @@ async filtrarPorNombre(buscado) {
               <Text style={{marginLeft: 10, marginBottom: 30, padding: 20, paddingLeft: 35, borderRadius: 15,  borderStyle: "solid", borderWidth: 1, color: "white"}}>Ver más </Text>
               <Text style={{marginLeft: 10,  marginBottom: 30, padding: 20, paddingLeft: 35, borderRadius: 15,  borderStyle: "solid", borderWidth: 1, color: "white"}}>Eliminar tarjeta</Text>
               <Image  style={styles.imagen} source={{uri:item.picture.thumbnail}} ></Image>
+              <Text> {comentarios}</Text>
+              
+              {/* COMENTARIOS */}
+              <TextInput  
+                       placeholder="Ingrese algun comentario.."
+                       style={styles.nombre}
+                       numberOfLines={10}
+                       multiline={true}
+                      onChangeText={text=> this.setState({comentarios : text})}
+                            /> 
+
+
+                        <TouchableOpacity onPress= {()=> this.storageComentarios(item)}>
+                              <Text> Guardar comentario </Text>
+                         </TouchableOpacity>
+                         {/* TERMINAN COMENTARIOS */}
               </View>
         
         </TouchableOpacity>}
