@@ -47,7 +47,7 @@ export default class ImportarTarjetas extends React.Component {
   }
 
 
-
+    // dos parametros
   async storeData(Usuarios, results) {
     try {
       // 5) PARA TODOS LOS SELECCIONADOS QUE SON NUMEROS SON LOS INDEXES LOS CONVIERTO EN EL ITEM --> AGARRO EL JSON 
@@ -98,6 +98,8 @@ export default class ImportarTarjetas extends React.Component {
 
   // EL KEY
   keyExtractor = (item, idx) => idx.toString();
+
+  
   // LO QUE SE MUESTRA
 
   render() {
