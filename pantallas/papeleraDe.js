@@ -59,7 +59,7 @@ export default class PapeleraDe extends Component {
           renderItem={({ item, index }) => (
             <TouchableOpacity
               onPress={() => {
-                Alert.alert("Deseas recuperar la tarjeta?", "fiumba", [
+                Alert.alert("Deseas recuperar la tarjeta?", "se restaurara", [
                   {
                     onPress: async () => {
                       const nuevosItems = this.state.items.filter(

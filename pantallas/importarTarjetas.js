@@ -1,4 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
+// import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { Component } from "react";
 import {
@@ -194,9 +194,8 @@ const styles = StyleSheet.create({
   },
   guardarItems: {
     backgroundColor: "lightseagreen",
-    margin: 5,
+    margin: 10,
     marginTop: 70,
-    marginBottom: 0,
     textAlign: "center",
     paddingBottom: 30,
     borderRadius: 30,
