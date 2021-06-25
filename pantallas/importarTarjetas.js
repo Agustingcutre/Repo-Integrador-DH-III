@@ -1,4 +1,4 @@
-// import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { Component } from "react";
 import {
@@ -46,11 +46,10 @@ export default class ImportarTarjetas extends React.Component {
     });
   }
 
-
-    // dos parametros
+  // dos parametros
   async storeData(Usuarios, results) {
     try {
-      // 5) PARA TODOS LOS SELECCIONADOS QUE SON NUMEROS SON LOS INDEXES LOS CONVIERTO EN EL ITEM --> AGARRO EL JSON 
+      // 5) PARA TODOS LOS SELECCIONADOS QUE SON NUMEROS SON LOS INDEXES LOS CONVIERTO EN EL ITEM --> AGARRO EL JSON
       // PARA CADA ITEM SELECCIONADO
       const usuariosJsonViejos = JSON.parse(
         await AsyncStorage.getItem("Usuarios")
@@ -68,8 +67,8 @@ export default class ImportarTarjetas extends React.Component {
         this.state.seleccionado.length +
         " tarjetas seleccionadas";
 
-        // 6) LO SETEO EN EL ASYNC STORAGE Y // LOS ITEMS QUE SON LOS JSON LE BORRO TODOS LOS QUE ESTABAN ANTES EN 
-        // SELECCIONADOS asi cuando guardo se van los que ya estaban seleccionados
+      // 6) LO SETEO EN EL ASYNC STORAGE Y // LOS ITEMS QUE SON LOS JSON LE BORRO TODOS LOS QUE ESTABAN ANTES EN
+      // SELECCIONADOS asi cuando guardo se van los que ya estaban seleccionados
       await AsyncStorage.setItem("Usuarios", jsonUsers);
 
       this.setState({
@@ -87,7 +86,7 @@ export default class ImportarTarjetas extends React.Component {
     }
   }
 
-  // 4) LOS SELECCIONADOS SON LOS SELECCIONADOS PREVIOS (ELIPSIS) Y EN REALIDAD ESTOY GUARDANDO LOS INDEXES POR ESO PONGO "TARJETA". 
+  // 4) LOS SELECCIONADOS SON LOS SELECCIONADOS PREVIOS (ELIPSIS) Y EN REALIDAD ESTOY GUARDANDO LOS INDEXES POR ESO PONGO "TARJETA".
   // ENTONCES CON LA ELIPSIS DIGO LOS DE ANTES M´AS EL NUEVO PARA QUE SE VAYAN ACUMULANDO
 
   seleccionar = (tarjeta) => {
@@ -99,7 +98,6 @@ export default class ImportarTarjetas extends React.Component {
   // EL KEY
   keyExtractor = (item, idx) => idx.toString();
 
-  
   // LO QUE SE MUESTRA
 
   render() {
@@ -123,8 +121,7 @@ export default class ImportarTarjetas extends React.Component {
           <Text style={styles.guardarItems}>Refrescar Items</Text>
         </TouchableOpacity>
 
-
-          {/* 2) EN ESTA FLATLIST RENDERIZAMOS LAS TARJETAS DEPENDIENDO SI ESTAN SELECCIONADAS O NO
+        {/* 2) EN ESTA FLATLIST RENDERIZAMOS LAS TARJETAS DEPENDIENDO SI ESTAN SELECCIONADAS O NO
           PREGUNTANDO SI EN EL ESTADO DE LOS SELECCIONADOS INCLUYE "ESTA" TARJETA O ITEM DE LA QUE ESTAMOS ITERANDO
           SI ES VERDADERO ME SALTA SELECCIONADA Y SINO UN STRING VACIO*/}
         <FlatList
@@ -197,8 +194,9 @@ const styles = StyleSheet.create({
   },
   guardarItems: {
     backgroundColor: "lightseagreen",
-    margin: 10,
+    margin: 5,
     marginTop: 70,
+    marginBottom: 0,
     textAlign: "center",
     paddingBottom: 30,
     borderRadius: 30,
@@ -225,3 +223,4 @@ const styles = StyleSheet.create({
     margin: 10,
   },
 });
+

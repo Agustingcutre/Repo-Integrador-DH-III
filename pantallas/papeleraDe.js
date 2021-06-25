@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Image,
   TextInput,
+  Alert,
 } from "react-native";
 
 export default class PapeleraDe extends Component {
@@ -56,7 +57,38 @@ export default class PapeleraDe extends Component {
         <FlatList
           data={this.state.items}
           renderItem={({ item, index }) => (
-            <TouchableOpacity style={styles.container}>
+            <TouchableOpacity
+              onPress={() => {
+                Alert.alert("Deseas recuperar la tarjeta?", "fiumba", [
+                  {
+                    onPress: async () => {
+                      const nuevosItems = this.state.items.filter(
+                        (usuario, idx) => idx !== index
+                      );
+
+                      this.setState({ items: nuevosItems });
+
+                      await AsyncStorage.setItem(
+                        "Borrados",
+                        JSON.stringify(nuevosItems)
+                      );
+                      const usuarios = JSON.parse(
+                        await AsyncStorage.getItem("Usuarios")
+                      );
+                      await AsyncStorage.setItem(
+                        "Usuarios",
+                        JSON.stringify([item, ...usuarios])
+                      );
+                    },
+                    text: "restaurar",
+                  },
+                  {
+                    text: "cancelar",
+                  },
+                ]);
+              }}
+              style={styles.container}
+            >
               <Image
                 style={styles.imagen}
                 source={{ uri: item.picture.thumbnail }}

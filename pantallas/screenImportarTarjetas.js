@@ -27,7 +27,7 @@ export default class ScreenImportarTarjetas extends Component {
     };
   }
 
-  // 1) TRAIGO LOS USUARIOS  
+  // 1) TRAIGO LOS USUARIOS
 
   componentDidMount() {
     this.traerUsuarios();
@@ -73,7 +73,7 @@ export default class ScreenImportarTarjetas extends Component {
       });
     } else {
       this.setState({
-        filtrados: "",
+        filtrados: [],
         // this.state.items,
         buscado: buscado,
       });
@@ -84,9 +84,9 @@ export default class ScreenImportarTarjetas extends Component {
 
   // COMENTARIOS
 
-  async storageComentarios(value) {
+  async storageComentarios(item) {
     try {
-      Object.assign(value, { comentarios: this.state.comentarios });
+      Object.assign(item, { comentarios: this.state.comentarios });
       const jsonValue = JSON.stringify(this.state.items);
       await AsyncStorage.setItem("Usuarios", jsonValue);
       console.log("se guardo en comentario");
@@ -96,9 +96,6 @@ export default class ScreenImportarTarjetas extends Component {
   }
 
   // TERMINA COMENTARIOS
-
-
-   
 
   render() {
     var { items } = this.state;
@@ -112,7 +109,7 @@ export default class ScreenImportarTarjetas extends Component {
           onChangeText={(buscado) => this.buscar(buscado)}
         />
 
-      {/* // 3) EL BOTON PARA ELIMINAR EN EL ASYNC STORAGE GUARDA UN ARRAY VACIO EN USUARIOS
+        {/* // 3) EL BOTON PARA ELIMINAR EN EL ASYNC STORAGE GUARDA UN ARRAY VACIO EN USUARIOS
       Y EN BORRADOS METE LOS ITEMS QUE ESTAN ACTUALMENTE  */}
 
         <TouchableOpacity
@@ -144,11 +141,9 @@ export default class ScreenImportarTarjetas extends Component {
         <FlatList
           style={styles.jose}
           data={
-            this.state.filtrados.length === 0
-            //  this.state.buscado.length === 0
-            
-              ? this.state.items
-              : this.state.filtrados
+            this.state.filtrados.length !== 0 || this.state.buscado.length > 0 // si hay busqueda
+              ? this.state.filtrados
+              : this.state.items
           }
           renderItem={({ item, index }) => (
             <View>
@@ -178,7 +173,9 @@ export default class ScreenImportarTarjetas extends Component {
                         "\n\nFecha:\n " +
                         item.dob.date +
                         "\n\nEdad:\n " +
-                        item.dob.age
+                        item.dob.age +
+                        "\n\nComentarios:\n " +
+                        item.comentarios
                     );
                   }}
                 >
@@ -243,7 +240,7 @@ export default class ScreenImportarTarjetas extends Component {
                   style={styles.imagen}
                   source={{ uri: item.picture.thumbnail }}
                 ></Image>
-                <Text> {comentarios}</Text>
+                <Text> {item.comentarios}</Text>
 
                 {/* COMENTARIOS */}
                 <TextInput

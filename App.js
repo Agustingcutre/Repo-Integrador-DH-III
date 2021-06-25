@@ -7,7 +7,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import ImportarTarjetas from "./pantallas/importarTarjetas";
 import ScreenImportarTarjetas from "./pantallas/screenImportarTarjetas";
 import AcercaDe from "./pantallas/acercaDe";
-import BuscarModificar from "./pantallas/buscarModificar";
+// import BuscarModificar from "./pantallas/buscarModificar";
 import React, { Component } from "react";
 import {
   FlatList,
